@@ -1,0 +1,46 @@
+{
+	"type": "object",
+	"$schema": "http://json-schema.org/draft-04/schema",
+	"id": "http://jsonschema.net",
+	"required": false,
+	"globals": {},
+	"properties": {
+		"pluginLocations": {
+			"type": "object",
+			"required": true,
+			"properties": {
+				"course": {
+					"type": "object",
+					"properties": {
+						"_routerLinks": {
+							"type": "object",
+							"required": false,
+							"legend": "Router links",
+							"properties": {
+								"_isEnabled": {
+									"type": "boolean",
+									"required": true,
+									"default": false,
+									"title": "Is enabled",
+									"inputType": "Checkbox",
+									"validators": [],
+									"help": "Enable or disable the router links"
+								},
+								"_selector": {
+									"type": "string",
+									"required": false,
+									"default": "a.router-link",
+									"title": "Selector",
+									"inputType": "Text",
+									"validators": [],
+									"help": "Default selector for router links",
+									"translatable": false
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

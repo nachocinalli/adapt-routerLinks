@@ -1,0 +1,7 @@
+//course.json
+{
+  "_routerLinks": {
+    "_isEnabled": true,
+    "_selector": "a.router-link"
+  }
+}

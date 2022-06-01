@@ -1,0 +1,19 @@
+{
+  "name": "adapt-routerLinks",
+  "version": "1.0.0",
+  "framework": ">=5.17.7",
+  "description": "An extension to allow a learner navigate to an adapt model element (page, article, block or component)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nachocinalli/adapt-routerLinks.git"
+  },
+  "main": "/js/adapt-routerLinks.js",
+  "displayName": "Router Links",
+  "extension": "routerLinks",
+  "keywords": ["adapt-plugin", "adapt-extension"],
+  "authors": ["Nacho Cinalli <nachocinalli@gmail.com>"],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/nachocinalli/adapt-routerLinks",
+  "issues": "https://github.com/nachocinalli/adapt-routerLinks/issues/",
+  "targetAttribute": "_routerLinks"
+}
