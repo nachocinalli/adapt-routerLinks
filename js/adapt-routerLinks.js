@@ -1,5 +1,4 @@
 import Adapt from 'core/js/adapt';
-import logging from 'core/js/logging';
 import router from 'core/js/router';
 class RouterLinks extends Backbone.Controller {
   initialize() {
@@ -18,17 +17,38 @@ class RouterLinks extends Backbone.Controller {
     this.listenTo(Adapt, 'pageView:preRemove', this.handlePageViewPreRemove);
   }
 
+  findRouterLinks(collection, modelId) {
+    return collection.findWhere((model) => {
+      return model.get('_routerLinks') && model.get('_routerLinks')._name === modelId;
+    });
+  }
+
   handlePageViewReady(view) {
     const _config = Adapt.course.get('_routerLinks');
     const _selector = _config._selector;
+
     $(_selector).on('click', this.handleClick.bind(this));
   }
 
   handleClick(event) {
     event.preventDefault();
-    const href = $(event.target).attr('href');
+    const $target = $(event.currentTarget);
+    const href = $target.attr('href');
     const startsWith = '#/id/';
-    const modelIdStr = href.startsWith(startsWith) ? href.replace(startsWith, '') : href.replace(/^#/, '');
+    let modelIdStr = href.startsWith(startsWith) ? href.replace(startsWith, '') : href.replace(/^#/, '');
+
+    if ($target.hasClass('router-link-name')) {
+      let model = this.findRouterLinks(Adapt.blocks, modelIdStr);
+      if (!model) {
+        model = this.findRouterLinks(Adapt.components, modelIdStr);
+        if (!model) {
+          return console.log('routerLinks: model not found', modelIdStr);
+        }
+      }
+      modelIdStr = model.get('_id');
+    }
+
+    if (!modelIdStr) return;
     this.navigateTo(modelIdStr);
   }
 
@@ -40,11 +60,11 @@ class RouterLinks extends Backbone.Controller {
 
   navigateTo(modelId) {
     _.defer(async () => {
-      const isSinglePage = (Adapt.contentObjects.models.length === 1);
+      const isSinglePage = Adapt.contentObjects.models.length === 1;
       try {
         await router.navigateToElement(modelId, { trigger: true, replace: isSinglePage, duration: 400 });
       } catch (err) {
-        logging.warn(`Router links cannot navigate to id: ${modelId}\n`, err);
+        console.log(`Router links cannot navigate to id: ${modelId}\n`, err);
       }
     });
   }
