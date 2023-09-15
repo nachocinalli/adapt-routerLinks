@@ -39,6 +39,50 @@
 							}
 						}
 					}
+				},
+				"block": {
+					"type": "object",
+					"properties": {
+						"_routerLinks": {
+							"type": "object",
+							"required": false,
+							"legend": "Router links",
+							"properties": {
+								"_name": {
+									"type": "string",
+									"required": false,
+									"default": "",
+									"title": "Unique name",
+									"inputType": "Text",
+									"validators": [],
+									"help": "Unique name for the router links",
+									"translatable": false
+								}
+							}
+						}
+					}
+				},
+				"component": {
+					"type": "object",
+					"properties": {
+						"_routerLinks": {
+							"type": "object",
+							"required": false,
+							"legend": "Router links",
+							"properties": {
+								"_name": {
+									"type": "string",
+									"required": false,
+									"default": "",
+									"title": "Unique name",
+									"inputType": "Text",
+									"validators": [],
+									"help": "Unique name for the router links",
+									"translatable": false
+								}
+							}
+						}
+					}
 				}
 			}
 		}
